@@ -21,6 +21,8 @@ export default function Home() {
     "date"
   );
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
 
   useEffect(() => {
     fetchSessions();
@@ -148,10 +150,24 @@ export default function Home() {
       });
   }, [sessions, searchTerm, statusFilter, sortBy, sortOrder]);
 
+  // Pagination logic
+  const totalPages = Math.ceil(filteredSessions.length / itemsPerPage);
+  const paginatedSessions = useMemo(() => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    return filteredSessions.slice(startIndex, endIndex);
+  }, [filteredSessions, currentPage, itemsPerPage]);
+
+  // Reset to page 1 when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm, statusFilter, sortBy, sortOrder]);
+
   // Clear all filters (functionality available but not exposed in current UI)
   const clearFilters = useCallback(() => {
     setSearchTerm("");
     setStatusFilter("All");
+    setCurrentPage(1);
   }, []);
 
   // Check if filters are active (for potential future UI enhancements)
@@ -159,13 +175,6 @@ export default function Home() {
     () => searchTerm || statusFilter !== "All",
     [searchTerm, statusFilter]
   );
-
-  // Prevent unused variable warnings in production build
-  // These are kept for potential future UI enhancements (sorting controls, clear filters button)
-  void clearFilters;
-  void hasActiveFilters;
-  void setSortBy;
-  void setSortOrder;
 
   if (error) {
     return (
@@ -237,13 +246,209 @@ export default function Home() {
           </div>
         </div>
 
+        {/* Filters and Search Bar */}
+        <div className={styles.filtersSection}>
+          <div className={styles.searchAndFilters}>
+            {/* Search Input */}
+            <div className={styles.searchWrapper}>
+              <svg
+                className={styles.searchIcon}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
+              <input
+                type="text"
+                placeholder="Search therapist or patient..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className={styles.searchInput}
+              />
+            </div>
+
+            {/* Status Filter */}
+            <select
+              value={statusFilter}
+              onChange={(e) =>
+                setStatusFilter(
+                  e.target.value as "All" | "Scheduled" | "Completed"
+                )
+              }
+              className={styles.filterSelect}
+            >
+              <option value="All">All Status</option>
+              <option value="Scheduled">Scheduled</option>
+              <option value="Completed">Completed</option>
+            </select>
+
+            {/* Sort By */}
+            <select
+              value={sortBy}
+              onChange={(e) =>
+                setSortBy(e.target.value as "date" | "therapist" | "patient")
+              }
+              className={styles.filterSelect}
+            >
+              <option value="date">Sort by Date</option>
+              <option value="therapist">Sort by Therapist</option>
+              <option value="patient">Sort by Patient</option>
+            </select>
+
+            {/* Sort Order */}
+            <button
+              onClick={() => setSortOrder(sortOrder === "asc" ? "desc" : "asc")}
+              className={styles.sortOrderButton}
+              title={`Sort ${sortOrder === "asc" ? "Descending" : "Ascending"}`}
+            >
+              <svg
+                className={styles.sortIcon}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                {sortOrder === "asc" ? (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12"
+                  />
+                ) : (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4"
+                  />
+                )}
+              </svg>
+            </button>
+
+            {/* Clear Filters Button */}
+            {hasActiveFilters && (
+              <button
+                onClick={clearFilters}
+                className={styles.clearFiltersButton}
+              >
+                <svg
+                  className={styles.clearIcon}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+                Clear Filters
+              </button>
+            )}
+          </div>
+
+          {/* Results Info */}
+          <div className={styles.resultsInfo}>
+            <span className={styles.resultsText}>
+              Showing {paginatedSessions.length} of {filteredSessions.length}{" "}
+              sessions
+              {hasActiveFilters && (
+                <span className={styles.filteredBadge}>
+                  (filtered from {sessions.length} total)
+                </span>
+              )}
+            </span>
+
+            {/* Items Per Page Selector */}
+            <div className={styles.perPageSelector}>
+              <span className={styles.perPageLabel}>Per page:</span>
+              <select
+                value={itemsPerPage}
+                onChange={(e) => {
+                  setItemsPerPage(Number(e.target.value));
+                  setCurrentPage(1);
+                }}
+                className={styles.perPageSelect}
+              >
+                <option value={5}>5</option>
+                <option value={10}>10</option>
+                <option value={20}>20</option>
+                <option value={50}>50</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
         {/* Session Table */}
         <SessionTable
-          sessions={filteredSessions}
+          sessions={paginatedSessions}
           onSessionUpdate={handleSessionUpdate}
           onSessionUpdateError={handleSessionUpdateError}
           loading={loading}
         />
+
+        {/* Pagination Controls */}
+        {filteredSessions.length > 0 && totalPages > 1 && (
+          <div className={styles.pagination}>
+            <button
+              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1}
+              className={styles.paginationButton}
+            >
+              <svg
+                className={styles.paginationIcon}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 19l-7-7 7-7"
+                />
+              </svg>
+              Previous
+            </button>
+
+            <div className={styles.pageInfo}>
+              <span className={styles.pageNumbers}>
+                Page {currentPage} of {totalPages}
+              </span>
+            </div>
+
+            <button
+              onClick={() =>
+                setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+              }
+              disabled={currentPage === totalPages}
+              className={styles.paginationButton}
+            >
+              Next
+              <svg
+                className={styles.paginationIcon}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </button>
+          </div>
+        )}
 
         {/* Create Session Modal */}
         <CreateSessionModal

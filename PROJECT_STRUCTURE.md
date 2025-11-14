@@ -72,13 +72,14 @@ origin-takehome-interview/
     ├── tsconfig.json               # TypeScript configuration
     ├── .env.local                  # Environment variables
     ├── .gitignore                  # Git ignore patterns
-    ├── next.config.mjs             # Next.js config (3-line ES module import from config/)
-    ├── tailwind.config.mjs         # Tailwind config (3-line ES module import from config/)
-    └── postcss.config.mjs          # PostCSS config (3-line ES module import from config/)
+    ├── next.config.js              # Next.js config (2-line import from config/)
+    ├── tailwind.config.js          # Tailwind config (2-line import from config/)
+    └── postcss.config.js           # PostCSS config (2-line import from config/)
 ```
 
-**Note:** The `.mjs` files in the root are minimal (3 lines each) ES module imports that reference the actual configurations in `config/`. These are required because Next.js, Tailwind CSS, and PostCSS have hardcoded expectations to find these files in the project root. Jest uses `--config=config/jest.config.js` to avoid needing a root-level file.
-```
+**Note:** The `.js` files in the root are minimal (2 lines each) that reference the actual configurations in `config/`. These are required because Next.js, Tailwind CSS, and PostCSS have hardcoded expectations to find these files in the project root. Jest uses `--config=config/jest.config.js` to avoid needing a root-level file.
+
+````
 
 ## 🎯 Architecture Principles
 
@@ -115,7 +116,7 @@ import { SessionWithDetails } from "@/types";
 import SessionTable from "@/components/SessionTable";
 import { apiCall } from "@/lib/utils";
 import styles from "@/styles/components/Dashboard.module.css";
-```
+````
 
 ### Component Structure
 
