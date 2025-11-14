@@ -3,7 +3,6 @@ node_modules/
 out/
 dist/
 .env.local
-origin_execution_plan.md
 
 # Dependency directories
 pnpm-lock.yaml
@@ -24,3 +23,9 @@ coverage/
 # TypeScript build output
 *.tsbuildinfo
 
+# Temporary markdown files
+docs/*.md
+DEPLOYMENT.md
+OPTIMIZATION_SUMMARY.md
+SUBMISSION_SUMMARY.md
+TEST_COVERAGE_REPORT.md

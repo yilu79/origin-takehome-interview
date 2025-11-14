@@ -1,0 +1,406 @@
+/* Shared styles module to eliminate code duplication */
+
+/* Common color variables */
+:root {
+  --color-blue-50: #eff6ff;
+  --color-blue-100: #dbeafe;
+  --color-blue-500: #3b82f6;
+  --color-blue-600: #2563eb;
+  --color-blue-700: #1d4ed8;
+  
+  --color-green-50: #f0fdf4;
+  --color-green-100: #dcfce7;
+  --color-green-500: #22c55e;
+  --color-green-600: #16a34a;
+  --color-green-700: #15803d;
+  --color-green-800: #166534;
+  
+  --color-yellow-100: #fef3c7;
+  --color-yellow-800: #92400e;
+  
+  --color-red-50: #fef2f2;
+  --color-red-500: #ef4444;
+  --color-red-600: #dc2626;
+  
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+  
+  /* Spacing variables */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 0.75rem;
+  --spacing-lg: 1rem;
+  --spacing-xl: 1.5rem;
+  --spacing-2xl: 2rem;
+  --spacing-3xl: 3rem;
+  
+  /* Border radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-full: 9999px;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px 0 rgb(0 0 0 / 0.06);
+  --shadow-lg: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -1px rgb(0 0 0 / 0.06);
+  
+  /* Transitions */
+  --transition-fast: 0.15s ease-in-out;
+  --transition-normal: 0.2s ease-in-out;
+  --transition-slow: 0.3s ease-in-out;
+}
+
+/* Base button styles */
+.buttonBase {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  border: none;
+  outline: none;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.buttonBase:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px var(--color-blue-500);
+}
+
+.buttonBase:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Button variants */
+.buttonPrimary {
+  background-color: var(--color-blue-600);
+  color: white;
+  padding: var(--spacing-sm) var(--spacing-lg);
+}
+
+.buttonPrimary:hover:not(:disabled) {
+  background-color: var(--color-blue-700);
+}
+
+.buttonSecondary {
+  background-color: white;
+  color: var(--color-gray-700);
+  border: 1px solid var(--color-gray-300);
+  padding: var(--spacing-sm) var(--spacing-lg);
+}
+
+.buttonSecondary:hover:not(:disabled) {
+  background-color: var(--color-gray-50);
+}
+
+.buttonSuccess {
+  background-color: var(--color-green-600);
+  color: white;
+  padding: var(--spacing-sm) var(--spacing-lg);
+}
+
+.buttonSuccess:hover:not(:disabled) {
+  background-color: var(--color-green-700);
+}
+
+.buttonDanger {
+  background-color: var(--color-red-600);
+  color: white;
+  padding: var(--spacing-sm) var(--spacing-lg);
+}
+
+.buttonDanger:hover:not(:disabled) {
+  background-color: var(--color-red-700);
+}
+
+/* Base card styles */
+.cardBase {
+  background-color: white;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+.cardPadded {
+  padding: var(--spacing-xl);
+}
+
+.cardBordered {
+  border: 1px solid var(--color-gray-200);
+}
+
+/* Base input styles */
+.inputBase {
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 1px solid var(--color-gray-300);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  background-color: white;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.inputBase:focus {
+  outline: none;
+  border-color: var(--color-blue-500);
+  box-shadow: 0 0 0 1px var(--color-blue-500);
+}
+
+.inputBase:disabled {
+  background-color: var(--color-gray-100);
+  color: var(--color-gray-500);
+  cursor: not-allowed;
+}
+
+.inputError {
+  border-color: var(--color-red-500);
+}
+
+.inputError:focus {
+  border-color: var(--color-red-500);
+  box-shadow: 0 0 0 1px var(--color-red-500);
+}
+
+/* Status badges */
+.badgeBase {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1;
+  border: 1px solid transparent;
+}
+
+.badgeSuccess {
+  background-color: var(--color-green-100);
+  color: var(--color-green-800);
+  border-color: var(--color-green-200);
+}
+
+.badgeWarning {
+  background-color: var(--color-yellow-100);
+  color: var(--color-yellow-800);
+  border-color: var(--color-yellow-200);
+}
+
+.badgePending {
+  background-color: var(--color-blue-100);
+  color: var(--color-blue-800);
+  border-color: var(--color-blue-200);
+}
+
+/* Loading states */
+.loadingBase {
+  background-color: var(--color-gray-200);
+  border-radius: var(--radius-sm);
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.loadingText {
+  height: 1rem;
+  width: 75%;
+}
+
+.loadingTitle {
+  height: 1.5rem;
+  width: 60%;
+}
+
+.loadingButton {
+  height: 2.5rem;
+  width: 6rem;
+}
+
+/* Message alerts */
+.alertBase {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  border: 1px solid transparent;
+}
+
+.alertSuccess {
+  background-color: var(--color-green-50);
+  color: var(--color-green-700);
+  border-color: var(--color-green-200);
+}
+
+.alertError {
+  background-color: var(--color-red-50);
+  color: var(--color-red-700);
+  border-color: var(--color-red-200);
+}
+
+.alertInfo {
+  background-color: var(--color-blue-50);
+  color: var(--color-blue-700);
+  border-color: var(--color-blue-200);
+}
+
+/* Layout utilities */
+.flexCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flexBetween {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flexColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.flexGap {
+  gap: var(--spacing-md);
+}
+
+.flexGapSm {
+  gap: var(--spacing-sm);
+}
+
+.flexGapLg {
+  gap: var(--spacing-lg);
+}
+
+/* Text utilities */
+.textCenter {
+  text-align: center;
+}
+
+.textMuted {
+  color: var(--color-gray-500);
+}
+
+.textError {
+  color: var(--color-red-600);
+}
+
+.textSuccess {
+  color: var(--color-green-600);
+}
+
+.fontMedium {
+  font-weight: 500;
+}
+
+.fontSemibold {
+  font-weight: 600;
+}
+
+/* Responsive utilities */
+.hideOnMobile {
+  display: block;
+}
+
+.showOnMobile {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .hideOnMobile {
+    display: none;
+  }
+  
+  .showOnMobile {
+    display: block;
+  }
+}
+
+/* Animation utilities */
+.fadeIn {
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slideIn {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* Overlay utilities */
+.overlayBase {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Focus utilities */
+.focusRing:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px var(--color-blue-500);
+}
+
+/* Hover utilities */
+.hoverScale:hover {
+  transform: scale(1.05);
+}
+
+.hoverShadow:hover {
+  box-shadow: var(--shadow-lg);
+}

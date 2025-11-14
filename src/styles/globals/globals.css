@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Critical CSS optimizations */
+@layer base {
+  /* Optimize font rendering */
+  html {
+    font-display: swap;
+    scroll-behavior: smooth;
+  }
+
+  /* Improve rendering performance */
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  /* Prevent layout shifts */
+  body {
+    margin: 0;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeSpeed;
+  }
+}
+
+@layer components {
+  /* Optimized button component */
+  .btn-primary {
+    @apply bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors duration-150;
+  }
+
+  /* Optimized input component */
+  .input-base {
+    @apply border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-150;
+  }
+
+  /* Loading skeleton optimization */
+  .loading-skeleton {
+    @apply bg-gray-200 animate-pulse;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+  }
+}
+
+@layer utilities {
+  /* Performance utilities */
+  .will-change-transform {
+    will-change: transform;
+  }
+
+  .will-change-opacity {
+    will-change: opacity;
+  }
+
+  /* Prevent unnecessary repaints */
+  .transform-gpu {
+    transform: translateZ(0);
+  }
+
+  /* Optimize animations */
+  .animate-smooth {
+    transition: all 0.15s ease-in-out;
+  }
+}
+
+/* Custom loading animation for better performance than default pulse */
+@keyframes loading {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
