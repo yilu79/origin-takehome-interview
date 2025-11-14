@@ -352,7 +352,7 @@ describe("SessionTable", () => {
     });
 
     it("disables button during update to prevent multiple requests", async () => {
-      let resolvePromise: (value: any) => void;
+      let resolvePromise: (value: unknown) => void;
       const delayedPromise = new Promise((resolve) => {
         resolvePromise = resolve;
       });

@@ -93,7 +93,15 @@ export * from "@testing-library/react";
 export { customRender as render };
 
 // Helper function to simulate fetch responses
-export const mockFetchResponse = (data: any, ok = true, status = 200) => {
+/**
+ * Mock fetch response for testing API calls
+ *
+ * @param data - The data to return in the mock response
+ * @param ok - Whether the response should be successful
+ * @param status - HTTP status code
+ * @returns A mock fetch implementation
+ */
+export const mockFetchResponse = (data: unknown, ok = true, status = 200) => {
   return Promise.resolve({
     ok,
     status,

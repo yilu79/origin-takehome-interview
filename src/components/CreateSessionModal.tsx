@@ -322,6 +322,11 @@ export default function CreateSessionModal({
                   disabled={loading || isSubmitting}
                   required
                 />
+                {!fieldErrors.date && (
+                  <p className={styles.fieldHint}>
+                    Select date, then select time (highlighted in blue)
+                  </p>
+                )}
                 {fieldErrors.date && (
                   <p className={styles.fieldError}>
                     <ErrorIcon className={styles.fieldErrorIcon || ""} />

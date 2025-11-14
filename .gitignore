@@ -24,9 +24,4 @@ coverage/
 *.tsbuildinfo
 
 # Temporary markdown files
-docs/*.md
-DEPLOYMENT.md
-OPTIMIZATION_SUMMARY.md
-SUBMISSION_SUMMARY.md
-TEST_COVERAGE_REPORT.md
-PROJECT_STRUCTURE.md
+origin_execution_plan.md

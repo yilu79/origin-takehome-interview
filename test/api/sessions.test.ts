@@ -15,7 +15,7 @@ jest.mock('../../lib/db', () => ({
 import { db } from '../../lib/db'
 
 // Helper function to create mock Request objects
-function createMockRequest(body?: any): Request {
+function createMockRequest(body?: unknown): Request {
   return {
     json: async () => body,
   } as unknown as Request

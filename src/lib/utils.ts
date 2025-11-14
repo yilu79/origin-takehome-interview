@@ -139,11 +139,11 @@ export async function apiCall<T = unknown>(
 }
 
 /**
- * Debounces a function call to prevent excessive executions
- * @template T - Function type
+ * Debounce function to limit how often a function can fire
+ * 
  * @param func - The function to debounce
- * @param wait - Delay in milliseconds
- * @returns Debounced function
+ * @param wait - The number of milliseconds to delay
+ * @returns A debounced version of the function
  * 
  * @example
  * ```typescript
@@ -152,7 +152,7 @@ export async function apiCall<T = unknown>(
  * }, 300);
  * ```
  */
-export function debounce<T extends (...args: any[]) => void>(
+export function debounce<T extends (...args: unknown[]) => void>(
   func: T,
   wait: number
 ): (...args: Parameters<T>) => void {
@@ -184,14 +184,14 @@ export function debounce<T extends (...args: any[]) => void>(
  * // Returns: [{ field: "name", message: "Name is required" }]
  * ```
  */
-export function validateRequiredFields(
-  data: Record<string, any>,
+export function validateRequiredFields<T extends object>(
+  data: T,
   requiredFields: string[]
 ): ValidationError[] {
   const errors: ValidationError[] = [];
   
   for (const field of requiredFields) {
-    const value = data[field];
+    const value = (data as Record<string, unknown>)[field];
     
     if (!value || (typeof value === "string" && value.trim() === "")) {
       errors.push({
