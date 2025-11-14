@@ -28,7 +28,6 @@ A full-stack therapy session management system prototype built with Next.js, Typ
 
 - Node.js 18+
 - npm 9+
-- Neon account ([neon.tech](https://neon.tech))
 
 ### Installation
 
@@ -68,9 +67,34 @@ Run the full test suite with Jest and React Testing Library:
 npm test            # Run all 58+ tests
 ```
 
-### API Endpoint Testing
+## API Endpoints
 
-Test API endpoints manually using the provided Postman collection:
+**Base URL:** `http://localhost:3001/api`
+
+### Sessions
+
+- **GET /api/sessions** - List all sessions
+- **POST /api/sessions** - Create session
+  ```json
+  { "therapist_id": 1, "patient_id": 2, "date": "2025-11-15T10:00:00Z" }
+  ```
+- **PATCH /api/sessions/[id]** - Update status
+  ```json
+  { "status": "Completed" }
+  ```
+
+### Users
+
+- **GET /api/therapists** - List therapists
+- **GET /api/patients** - List patients
+
+### Error Codes
+
+- **400** - Invalid input
+- **404** - Not found
+- **500** - Server error
+
+### Postman Collection
 
 **Collection File:** [`test/origin-therapy-session-management.postman_collection.json`](./test/origin-therapy-session-management.postman_collection.json)
 
@@ -100,8 +124,6 @@ Test API endpoints manually using the provided Postman collection:
    vercel login
    ```
 
-````
-
 2. **Link Project**
 
    ```bash
@@ -127,38 +149,13 @@ Test API endpoints manually using the provided Postman collection:
 
 Your app will be live at `https://your-project.vercel.app`
 
+Please check out [Therapy Session Dashboard](https://origin-therapist-session-dashboard-7vjn1zmyn-annie-lus-projects.vercel.app/) for reference.
+
 ### Troubleshooting
 
 - **500 Error:** DATABASE_URL not set → Add it in Vercel dashboard
 - **Build Error:** Run `npm run build` locally first to verify
 - **DB Connection Error:** Test locally with `npm run db:test`
-
-## API Endpoints
-
-**Base URL:** `http://localhost:3001/api`
-
-### Sessions
-
-- **GET /api/sessions** - List all sessions
-- **POST /api/sessions** - Create session
-  ```json
-  { "therapist_id": 1, "patient_id": 2, "date": "2025-11-15T10:00:00Z" }
-  ```
-- **PATCH /api/sessions/[id]** - Update status
-  ```json
-  { "status": "Completed" }
-  ```
-
-### Users
-
-- **GET /api/therapists** - List therapists
-- **GET /api/patients** - List patients
-
-### Error Codes
-
-- **400** - Invalid input
-- **404** - Not found
-- **500** - Server error
 
 ## Architecture Notes
 
@@ -404,4 +401,7 @@ MIT License - see [LICENSE](./LICENSE)
 ---
 
 Built with Next.js 16, TypeScript, Drizzle ORM, and Neon PostgreSQL
-````
+
+```
+
+```
