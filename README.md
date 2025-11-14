@@ -33,23 +33,22 @@ A full-stack therapy session management system prototype built with Next.js, Typ
 ### Installation
 
 ```bash
-# Clone and install
+# Clone
 git clone https://github.com/yilu79/origin-takehome-interview.git
 cd origin-takehome-interview
-npm install
 
 # Setup environment
 cp .env.example .env.local
 # Edit .env.local and add your DATABASE_URL shared by Ni Xu or your interviewer
 
-# Verify database connection
-npm run db:test
+# install the dependencies
+npm install
 
 # Start development server
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000)
+Open [http://localhost:3001](http://localhost:3001)
 
 ## Environment Variables
 
@@ -59,12 +58,36 @@ Validate the environment variables in `.env.local` containing the Neon database 
 DATABASE_URL="postgresql://user:password@ep-xxx.aws.neon.tech/neondb?sslmode=require"
 ```
 
-## Available Scripts
+## Testing
 
-````bash
-# Development
-npm run dev          # Start dev server with hot reload
-npm test            # Run tests
+### Automated Testing
+
+Run the full test suite with Jest and React Testing Library:
+
+```bash
+npm test            # Run all 58+ tests
+```
+
+### API Endpoint Testing
+
+Test API endpoints manually using the provided Postman collection:
+
+**Collection File:** [`test/origin-therapy-session-management.postman_collection.json`](./test/origin-therapy-session-management.postman_collection.json)
+
+**Included Requests:**
+
+- Get all sessions
+- Create a session
+- Update session status
+- Get therapists/patients
+- Error handling examples (404, 400)
+
+**Import to Postman:**
+
+1. Open Postman
+2. Click **Import** → **Choose Files**
+3. Select `test/origin-therapy-session-management.postman_collection.json`
+4. Run requests against `http://localhost:3001`
 
 ## Deploy to Vercel
 
@@ -75,6 +98,8 @@ npm test            # Run tests
    ```bash
    npm install -g vercel
    vercel login
+   ```
+
 ````
 
 2. **Link Project**
@@ -92,7 +117,7 @@ npm test            # Run tests
    Add:
 
    - **Name:** `DATABASE_URL`
-   - **Value:** Your Neon connection string
+   - **Value:** Your DATABASE_URL
    - **Environments:** Production, Preview, Development (select all)
 
 4. **Deploy**
@@ -110,7 +135,7 @@ Your app will be live at `https://your-project.vercel.app`
 
 ## API Endpoints
 
-**Base URL:** `http://localhost:3000/api`
+**Base URL:** `http://localhost:3001/api`
 
 ### Sessions
 
@@ -134,14 +159,6 @@ Your app will be live at `https://your-project.vercel.app`
 - **400** - Invalid input
 - **404** - Not found
 - **500** - Server error
-
-## Testing
-
-**58+ tests** covering components, pages, and utilities.
-
-```bash
-npm test                  # Run all tests
-```
 
 ## Architecture Notes
 
@@ -387,3 +404,4 @@ MIT License - see [LICENSE](./LICENSE)
 ---
 
 Built with Next.js 16, TypeScript, Drizzle ORM, and Neon PostgreSQL
+````
