@@ -56,8 +56,9 @@ const nextConfig = {
     ];
   },
 
-  // Output optimization for production
-  output: process.env.NODE_ENV === 'production' ? 'standalone' : undefined,
+  // Output optimization for Vercel deployment only
+  // Vercel automatically handles standalone builds, so we don't need to set it
+  // Removing this allows 'npm start' to work locally for testing production builds
 };
 
 module.exports = nextConfig;

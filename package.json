@@ -17,7 +17,7 @@
     "test:ci": "jest --config=config/jest.config.js --ci --coverage --watchAll=false --testPathIgnorePatterns=\"test/api/\" --testPathIgnorePatterns=\"test/utils/\""
   },
   "dependencies": {
-    "@neondatabase/serverless": "^1.0.2",
+    "@neondatabase/serverless": "^0.10.4",
     "date-fns": "^4.1.0",
     "dotenv": "^17.2.3",
     "drizzle-orm": "^0.38.3",
