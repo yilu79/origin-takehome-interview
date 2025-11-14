@@ -17,6 +17,7 @@
     "test:ci": "jest --config=config/jest.config.js --ci --coverage --watchAll=false --testPathIgnorePatterns=\"test/api/\" --testPathIgnorePatterns=\"test/utils/\""
   },
   "dependencies": {
+    "dotenv": "^17.2.3",
     "next": "16.0.3",
     "react": "^18",
     "react-dom": "^18"
