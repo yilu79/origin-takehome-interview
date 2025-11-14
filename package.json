@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:prod": "NODE_ENV=production next build",
     "start": "next start",
+    "start:prod": "NODE_ENV=production next start",
     "lint": "next lint",
     "test": "jest --config=config/jest.config.js --testPathIgnorePatterns=\"test/api/\" --testPathIgnorePatterns=\"test/utils/\"",
     "test:all": "jest --config=config/jest.config.js",
@@ -14,7 +16,10 @@
     "test:api": "jest --config=config/jest.config.js test/api/",
     "test:watch": "jest --config=config/jest.config.js --watch --testPathIgnorePatterns=\"test/api/\" --testPathIgnorePatterns=\"test/utils/\"",
     "test:coverage": "jest --config=config/jest.config.js --coverage --testPathIgnorePatterns=\"test/api/\" --testPathIgnorePatterns=\"test/utils/\"",
-    "test:ci": "jest --config=config/jest.config.js --ci --coverage --watchAll=false --testPathIgnorePatterns=\"test/api/\" --testPathIgnorePatterns=\"test/utils/\""
+    "test:ci": "jest --config=config/jest.config.js --ci --coverage --watchAll=false --testPathIgnorePatterns=\"test/api/\" --testPathIgnorePatterns=\"test/utils/\"",
+    "db:test": "npx tsx test-prod-db.ts",
+    "vercel:deploy": "vercel --prod",
+    "vercel:preview": "vercel"
   },
   "dependencies": {
     "@neondatabase/serverless": "^0.10.4",

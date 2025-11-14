@@ -199,10 +199,13 @@ npm run build
 npm start
 ```
 
-#### Run Tests
+### Development Commands
 
 ```bash
-# Run all tests
+# Start development server (hot reload enabled)
+npm run dev
+
+# Run tests
 npm test
 
 # Run tests with coverage
@@ -211,6 +214,38 @@ npm run test:coverage
 # Run specific test suites
 npm run test:components
 npm run test:app
+
+# Lint code
+npm run lint
+```
+
+### Production Commands
+
+```bash
+# Build for production
+npm run build
+
+# Build with explicit production environment
+npm run build:prod
+
+# Start production server locally (requires .env.local)
+npm start
+
+# Start with explicit production environment
+npm run start:prod
+
+# Test database connection
+npm run db:test
+```
+
+### Deployment Commands
+
+```bash
+# Deploy to Vercel production
+npm run vercel:deploy
+
+# Deploy to Vercel preview
+npm run vercel:preview
 ```
 
 ## 📡 API Documentation
