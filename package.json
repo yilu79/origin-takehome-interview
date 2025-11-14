@@ -17,14 +17,14 @@
     "test:ci": "jest --config=config/jest.config.js --ci --coverage --watchAll=false --testPathIgnorePatterns=\"test/api/\" --testPathIgnorePatterns=\"test/utils/\""
   },
   "dependencies": {
-    "@neondatabase/serverless": "^0.10.5",
+    "@neondatabase/serverless": "^1.0.2",
     "date-fns": "^4.1.0",
     "dotenv": "^17.2.3",
     "drizzle-orm": "^0.38.3",
     "next": "16.0.3",
     "react": "^18",
     "react-dom": "^18",
-    "zod": "^3.24.2"
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.9.1",
