@@ -25,3 +25,4 @@ coverage/
 
 # Temporary markdown files
 origin_execution_plan.md
+.vercel
