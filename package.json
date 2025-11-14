@@ -7,14 +7,14 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest --testPathIgnorePatterns=\"test/api/\" --testPathIgnorePatterns=\"test/utils/\"",
-    "test:all": "jest",
-    "test:components": "jest test/components/",
-    "test:app": "jest test/app/",
-    "test:api": "jest test/api/",
-    "test:watch": "jest --watch --testPathIgnorePatterns=\"test/api/\" --testPathIgnorePatterns=\"test/utils/\"",
-    "test:coverage": "jest --coverage --testPathIgnorePatterns=\"test/api/\" --testPathIgnorePatterns=\"test/utils/\"",
-    "test:ci": "jest --ci --coverage --watchAll=false --testPathIgnorePatterns=\"test/api/\" --testPathIgnorePatterns=\"test/utils/\""
+    "test": "jest --config=config/jest.config.js --testPathIgnorePatterns=\"test/api/\" --testPathIgnorePatterns=\"test/utils/\"",
+    "test:all": "jest --config=config/jest.config.js",
+    "test:components": "jest --config=config/jest.config.js test/components/",
+    "test:app": "jest --config=config/jest.config.js test/app/",
+    "test:api": "jest --config=config/jest.config.js test/api/",
+    "test:watch": "jest --config=config/jest.config.js --watch --testPathIgnorePatterns=\"test/api/\" --testPathIgnorePatterns=\"test/utils/\"",
+    "test:coverage": "jest --config=config/jest.config.js --coverage --testPathIgnorePatterns=\"test/api/\" --testPathIgnorePatterns=\"test/utils/\"",
+    "test:ci": "jest --config=config/jest.config.js --ci --coverage --watchAll=false --testPathIgnorePatterns=\"test/api/\" --testPathIgnorePatterns=\"test/utils/\""
   },
   "dependencies": {
     "next": "16.0.3",
