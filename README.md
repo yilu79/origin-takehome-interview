@@ -1,606 +1,389 @@
 # Origin Therapy - Session Management Dashboard
 
-A modern, full-stack web application for managing therapy sessions between therapists and patients. Built with Next.js 16, TypeScript, and PostgreSQL.
+A full-stack therapy session management system prototype built with Next.js, TypeScript, and PostgreSQL.
 
 [![Next.js](https://img.shields.io/badge/Next.js-16.0.3-black)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)](https://www.typescriptlang.org/)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Neon-336791)](https://neon.tech/)
-[![License](https://img.shields.io/badge/license-MIT-green)](./docs/LICENSE)
 
-## 📋 Table of Contents
+## Features
 
-- [Features](#-features)
-- [Tech Stack](#-tech-stack)
-- [Project Structure](#-project-structure)
-- [Getting Started](#-getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-  - [Environment Setup](#environment-setup)
-  - [Running the Application](#running-the-application)
-- [API Documentation](#-api-documentation)
-- [Testing](#-testing)
-- [Deployment](#-deployment)
-- [Design Decisions](#-design-decisions)
-- [Performance Optimizations](#-performance-optimizations)
-- [Future Enhancements](#-future-enhancements)
-- [Contributing](#-contributing)
-- [License](#-license)
+- 📅 Create, view, and update therapy sessions
+- 🔍 Search, filter, and sort sessions
+- 📄 Pagination with configurable page sizes
+- ⚡ Optimistic UI updates
+- 📱 Fully responsive design
+- ✅ 58+ passing tests
+- 🎯 100% TypeScript (strict mode, no `any`)
 
-## ✨ Features
+## Tech Stack
 
-### Core Functionality
+**Frontend:** Next.js 16 (App Router), TypeScript, TailwindCSS, React Hooks  
+**Backend:** Next.js API Routes, PostgreSQL (Neon), Drizzle ORM, Zod  
+**Testing:** Jest, React Testing Library
 
-- **📅 Session Management**: View, create, and update therapy sessions
-- **👥 Real-time Dashboard**: Display sessions with therapist and patient details
-- **✅ Status Updates**: Mark sessions as completed with optimistic UI updates
-- **🔍 Advanced Filtering**: Multi-criteria search and filter system
-- **📊 Sorting**: Sort by date, therapist, or patient name (ascending/descending)
-- **📄 Pagination**: Configurable items per page (5, 10, 20, 50)
-- **📱 Responsive Design**: Mobile-first approach with adaptive layouts
-
-### User Experience
-
-- **⚡ Optimistic Updates**: Instant UI feedback with error rollback
-- **🎨 Modern UI**: Clean, professional interface with TailwindCSS
-- **♿ Accessibility**: ARIA labels, keyboard navigation, focus states
-- **🔄 Loading States**: Skeleton screens and loading indicators
-- **❌ Error Handling**: Graceful error messages with retry functionality
-- **✨ Visual Feedback**: Success messages, hover states, smooth transitions
-
-### Technical Features
-
-- **🎯 Type-Safe**: Strict TypeScript throughout (no `any` types)
-- **⚡ Performance**: React hooks optimization (useMemo, useCallback)
-- **🧪 Well-Tested**: Comprehensive test suite with 58+ tests
-- **📦 Optimized Build**: Code splitting, tree shaking, SWC minification
-- **🔒 Secure**: Environment variable management, API validation
-
-## 🛠️ Tech Stack
-
-### Frontend
-
-- **Framework**: [Next.js 16.0.3](https://nextjs.org/) (App Router with Turbopack)
-- **Language**: [TypeScript 5.0](https://www.typescriptlang.org/) (Strict mode)
-- **Styling**: [TailwindCSS 3.4](https://tailwindcss.com/) + CSS Modules
-- **UI Components**: Custom React components with SVG icons
-- **State Management**: React hooks (useState, useEffect, useMemo, useCallback)
-
-### Backend
-
-- **API**: Next.js API Routes (REST)
-- **Database**: [PostgreSQL](https://www.postgresql.org/) (Neon Serverless)
-- **ORM**: [Drizzle ORM](https://orm.drizzle.team/)
-- **Validation**: [Zod](https://zod.dev/) schemas
-- **Date Handling**: [date-fns](https://date-fns.org/)
-
-### Development & Testing
-
-- **Testing**: [Jest](https://jestjs.io/) + [React Testing Library](https://testing-library.com/react)
-- **Linting**: ESLint with Next.js config
-- **Build Tool**: Turbopack (Next.js 16)
-- **Package Manager**: npm
-
-## 📁 Project Structure
-
-```
-origin-takehome-interview/
-├── src/                           # Source code
-│   ├── app/                       # Next.js App Router
-│   │   ├── api/                   # API routes
-│   │   │   ├── sessions/          # Session endpoints
-│   │   │   ├── therapists/        # Therapist endpoints
-│   │   │   └── patients/          # Patient endpoints
-│   │   ├── layout.tsx             # Root layout
-│   │   └── page.tsx               # Main dashboard
-│   ├── components/                # React components
-│   │   ├── SessionTable.tsx       # Session list display
-│   │   ├── CreateSessionModal.tsx # Session creation form
-│   │   ├── ErrorBoundary.tsx      # Error handling
-│   │   └── Icons.tsx              # SVG icon components
-│   ├── lib/                       # Utilities and database
-│   │   ├── db.ts                  # Database connection
-│   │   ├── schema.ts              # Drizzle schema
-│   │   └── utils.ts               # Helper functions
-│   ├── types/                     # TypeScript types
-│   │   └── index.ts               # Type definitions
-│   └── styles/                    # CSS modules
-│       ├── components/            # Component styles
-│       └── globals/               # Global styles
-├── test/                          # Test suite
-│   ├── app/                       # Page tests
-│   ├── components/                # Component tests
-│   └── utils/                     # Test utilities
-├── config/                        # Configuration files
-│   ├── jest.config.js             # Jest configuration
-│   ├── next.config.js             # Next.js configuration
-│   ├── tailwind.config.js         # Tailwind configuration
-│   └── postcss.config.js          # PostCSS configuration
-├── database/                      # Database files
-│   └── db_schema_reference.sql    # Schema reference
-├── docs/                          # Documentation
-│   ├── DEPLOYMENT.md              # Deployment guide
-│   ├── OPTIMIZATION_SUMMARY.md    # Performance docs
-│   └── LICENSE                    # License file
-└── scripts/                       # Build/utility scripts
-```
-
-## 🚀 Getting Started
+## Quick Start
 
 ### Prerequisites
 
-- **Node.js**: 18.x or higher
-- **npm**: 9.x or higher
-- **PostgreSQL**: Neon account (or local PostgreSQL 14+)
+- Node.js 18+
+- npm 9+
+- Neon account ([neon.tech](https://neon.tech))
 
 ### Installation
 
-1. **Clone the repository**
-
-   ```bash
-   git clone https://github.com/yilu79/origin-takehome-interview.git
-   cd origin-takehome-interview
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-### Environment Setup
-
-1. **Create environment file**
-
-   ```bash
-   cp .env.example .env.local
-   # or create manually
-   ```
-
-2. **Configure environment variables**
-
-   Add your database connection string to `.env.local`:
-
-   ```env
-   DATABASE_URL="postgresql://user:password@host/database?sslmode=require"
-   ```
-
-   **For Neon Database:**
-
-   - Sign up at [neon.tech](https://neon.tech)
-   - Create a new project
-   - Copy the connection string from your project dashboard
-   - Paste it as the `DATABASE_URL` value
-
-3. **Initialize the database**
-
-   The database schema is automatically created. Reference schema:
-
-   ```sql
-   -- See database/db_schema_reference.sql for full schema
-
-   -- Tables: therapists, patients, sessions
-   -- Foreign keys: therapist_id, patient_id
-   -- Indexes: date, status
-   ```
-
-### Running the Application
-
-#### Development Mode
-
 ```bash
-npm run dev
-```
+# Clone and install
+git clone https://github.com/yilu79/origin-takehome-interview.git
+cd origin-takehome-interview
+npm install
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+# Setup environment
+cp .env.example .env.local
+# Edit .env.local and add your DATABASE_URL shared by Ni Xu or your interviewer
 
-#### Production Build
-
-```bash
-npm run build
-npm start
-```
-
-### Development Commands
-
-```bash
-# Start development server (hot reload enabled)
-npm run dev
-
-# Run tests
-npm test
-
-# Run tests with coverage
-npm run test:coverage
-
-# Run specific test suites
-npm run test:components
-npm run test:app
-
-# Lint code
-npm run lint
-```
-
-### Production Commands
-
-```bash
-# Build for production
-npm run build
-
-# Build with explicit production environment
-npm run build:prod
-
-# Start production server locally (requires .env.local)
-npm start
-
-# Start with explicit production environment
-npm run start:prod
-
-# Test database connection
+# Verify database connection
 npm run db:test
+
+# Start development server
+npm run dev
 ```
 
-### Deployment Commands
+Open [http://localhost:3000](http://localhost:3000)
 
-```bash
-# Deploy to Vercel production
-npm run vercel:deploy
+## Environment Variables
 
-# Deploy to Vercel preview
-npm run vercel:preview
+Validate the environment variables in `.env.local` containing the Neon database connection:
+
+```env
+DATABASE_URL="postgresql://user:password@ep-xxx.aws.neon.tech/neondb?sslmode=require"
 ```
 
-## 📡 API Documentation
+## Available Scripts
 
-### Base URL
+````bash
+# Development
+npm run dev          # Start dev server with hot reload
+npm test            # Run tests
 
-```
-http://localhost:3000/api
-```
+## Deploy to Vercel
 
-### Endpoints
+### Setup
 
-#### **GET /api/sessions**
-
-Retrieve all sessions with therapist and patient details.
-
-**Response:**
-
-```json
-[
-  {
-    "id": 1,
-    "therapist_id": 1,
-    "patient_id": 2,
-    "therapist_name": "Dr. Sarah Johnson",
-    "patient_name": "John Doe",
-    "date": "2025-11-15T10:00:00Z",
-    "status": "Scheduled"
-  }
-]
-```
-
-#### **POST /api/sessions**
-
-Create a new therapy session.
-
-**Request Body:**
-
-```json
-{
-  "therapist_id": 1,
-  "patient_id": 2,
-  "date": "2025-11-15T10:00:00Z"
-}
-```
-
-**Response:** `201 Created`
-
-```json
-{
-  "id": 1,
-  "therapist_id": 1,
-  "patient_id": 2,
-  "date": "2025-11-15T10:00:00Z",
-  "status": "Scheduled"
-}
-```
-
-#### **PATCH /api/sessions/[id]**
-
-Update a session's status.
-
-**Request Body:**
-
-```json
-{
-  "status": "Completed"
-}
-```
-
-**Response:** `200 OK`
-
-```json
-{
-  "id": 1,
-  "status": "Completed",
-  ...
-}
-```
-
-#### **GET /api/therapists**
-
-Get all therapists.
-
-#### **GET /api/patients**
-
-Get all patients.
-
-### Error Responses
-
-**400 Bad Request** - Invalid input
-
-```json
-{
-  "error": "Invalid input",
-  "details": [...]
-}
-```
-
-**404 Not Found** - Resource not found
-
-```json
-{
-  "error": "Session not found"
-}
-```
-
-**500 Internal Server Error** - Server error
-
-```json
-{
-  "error": "Internal server error"
-}
-```
-
-## 🧪 Testing
-
-### Test Coverage
-
-- **58+ Tests** across components, pages, and utilities
-- **Component Tests**: SessionTable, CreateSessionModal, ErrorBoundary
-- **Integration Tests**: Dashboard functionality, API mocking
-- **Unit Tests**: Utility functions, type definitions
-
-### Running Tests
-
-```bash
-# Run all tests
-npm test
-
-# Run with coverage report
-npm run test:coverage
-
-# Run specific test file
-npm test -- SessionTable.test.tsx
-
-# Run in watch mode
-npm run test:watch
-
-# Run CI tests
-npm run test:ci
-```
-
-### Test Structure
-
-```
-test/
-├── app/
-│   └── page.test.tsx              # Dashboard tests
-├── components/
-│   ├── SessionTable.test.tsx      # Table component tests
-│   └── CreateSessionModal.test.tsx # Modal tests
-└── utils/
-    └── test-utils.tsx             # Testing utilities
-```
-
-## 🚀 Deployment
-
-### Vercel Deployment (Recommended)
-
-1. **Push to GitHub**
+1. **Install Vercel CLI & Login**
 
    ```bash
-   git push origin main
+   npm install -g vercel
+   vercel login
+````
+
+2. **Link Project**
+
+   ```bash
+   vercel
    ```
 
-2. **Import to Vercel**
+   Follow prompts to create new project.
 
-   - Go to [vercel.com](https://vercel.com)
-   - Import your GitHub repository
-   - Vercel auto-detects Next.js
+3. **Add Environment Variable**
 
-3. **Configure Environment Variables**
+   Go to [Vercel Dashboard](https://vercel.com) → Your Project → Settings → Environment Variables
 
-   - Add `DATABASE_URL` in Vercel dashboard
-   - Settings → Environment Variables
+   Add:
+
+   - **Name:** `DATABASE_URL`
+   - **Value:** Your Neon connection string
+   - **Environments:** Production, Preview, Development (select all)
 
 4. **Deploy**
-   - Vercel automatically deploys on push
-   - Production URL provided
+   ```bash
+   vercel --prod
+   ```
 
-### Manual Deployment
+Your app will be live at `https://your-project.vercel.app`
+
+### Troubleshooting
+
+- **500 Error:** DATABASE_URL not set → Add it in Vercel dashboard
+- **Build Error:** Run `npm run build` locally first to verify
+- **DB Connection Error:** Test locally with `npm run db:test`
+
+## API Endpoints
+
+**Base URL:** `http://localhost:3000/api`
+
+### Sessions
+
+- **GET /api/sessions** - List all sessions
+- **POST /api/sessions** - Create session
+  ```json
+  { "therapist_id": 1, "patient_id": 2, "date": "2025-11-15T10:00:00Z" }
+  ```
+- **PATCH /api/sessions/[id]** - Update status
+  ```json
+  { "status": "Completed" }
+  ```
+
+### Users
+
+- **GET /api/therapists** - List therapists
+- **GET /api/patients** - List patients
+
+### Error Codes
+
+- **400** - Invalid input
+- **404** - Not found
+- **500** - Server error
+
+## Testing
+
+**58+ tests** covering components, pages, and utilities.
 
 ```bash
-# Build for production
-npm run build
-
-# Start production server
-npm start
+npm test                  # Run all tests
 ```
 
-See [docs/DEPLOYMENT.md](./docs/DEPLOYMENT.md) for detailed deployment instructions.
+## Architecture Notes
 
-## 🎯 Design Decisions
+### Key Decisions
 
-### Architecture Choices
+- **Next.js App Router:** Server components for better performance
+- **Drizzle ORM:** Type-safe, serverless-friendly
+- **Client-Side Filtering:** Faster UX for moderate datasets (<1000 sessions)
+- **CSS Modules + Tailwind:** Scoped styles + utility classes
 
-#### **1. Next.js App Router**
+### MVP Assumptions & Limitations
 
-- **Why**: Modern routing with server components support
-- **Benefit**: Better performance, cleaner API routes
-- **Trade-off**: Newer API, less community resources than Pages Router
+**Current State:**
 
-#### **2. Drizzle ORM**
+- **Session States:** Only Scheduled/Completed (production needs: Cancelled, Rescheduled, No-Show)
+- **Authentication:** None - assumes internal tool or demo environment
+- **Data Volume:** Optimized for <1000 sessions with client-side filtering
+- **Booking Conflicts:** No double-booking prevention or therapist availability checking
+- **Concurrency:** Basic optimistic updates without conflict resolution
+- **Data Retention:** No archiving strategy - all sessions kept indefinitely
 
-- **Why**: Lightweight, type-safe, serverless-friendly
-- **Benefit**: Better TypeScript integration than Prisma
-- **Trade-off**: Smaller ecosystem, manual schema management
+### Production Readiness Roadmap
 
-#### **3. Client-Side Filtering vs. API Pagination**
+#### 1. Authentication & Authorization
 
-- **Current**: Client-side filtering with frontend pagination
-- **Why**: Faster user experience, no API roundtrips
-- **Limitation**: Not suitable for very large datasets (>1000 sessions)
-- **Future**: Implement API-side pagination for scalability
+**Implementation Strategy:**
 
-#### **4. Optimistic UI Updates**
+```typescript
+// Recommended: NextAuth.js with JWT + Database sessions
+// - Role-Based Access Control (RBAC): Admin, Therapist, Patient, Receptionist
+// - Row-Level Security (RLS) in PostgreSQL for data isolation
+// - Session management with secure HTTP-only cookies
+// - OAuth2 integration (Google, Microsoft) for SSO
+```
 
-- **Why**: Better perceived performance
-- **Implementation**: Update UI immediately, revert on error
-- **Benefit**: Feels instant to users, modern UX pattern
+**Security Enhancements:**
 
-#### **5. CSS Modules + TailwindCSS**
+- Multi-factor authentication (MFA) for admin/therapist roles
+- API rate limiting per user (e.g., 100 requests/minute)
+- CSRF protection with token rotation
+- Audit logging for sensitive operations (session creation, status changes)
 
-- **Why**: Scoped styles + utility classes
-- **Benefit**: No style conflicts, rapid development
-- **Trade-off**: Slightly larger CSS bundle
+#### 2. Smart Booking & Conflict Prevention
 
-### Assumptions
+**Therapist Availability Engine:**
 
-1. **Session Status**: Only two states (Scheduled/Completed)
-   - Real-world might need: Cancelled, Rescheduled, No-Show
-2. **User Authentication**: Not implemented
-   - Assumed for demo/internal tool
-   - Would add: NextAuth.js or Auth0
-3. **Data Volume**: Moderate dataset (<1000 sessions)
-   - Client-side filtering acceptable
-   - API pagination needed for production scale
-4. **Session Conflicts**: No validation
-   - Would add: Double-booking prevention
-   - Therapist availability checking
+```typescript
+// - Working hours configuration (9 AM - 5 PM, customizable per therapist)
+// - Vacation/time-off calendar integration
+// - Concurrent booking prevention with database locks
+// - Buffer time between sessions (e.g., 15-minute breaks)
+// - Timezone-aware scheduling (store UTC, display local)
+```
 
-## ⚡ Performance Optimizations
+**Booking Intelligence:**
 
-### Frontend Optimizations
+- Double-booking prevention with optimistic locking (`version` column)
+- Patient preference tracking (preferred therapist, time slots)
+- Automatic rescheduling suggestions based on availability
+- Waitlist management for fully booked slots
 
-1. **React Performance**
+#### 3. Performance & Scalability
 
-   - `useMemo` for expensive filtering/sorting operations
-   - `useCallback` for event handlers to prevent re-renders
-   - Memoized components with stable references
+**Database Optimizations:**
 
-2. **Build Optimizations**
+```sql
+-- Connection Pooling Strategy (Neon/Supabase)
+-- - Pool size: 10-20 connections for typical load
+-- - Idle timeout: 30 seconds
+-- - Max lifetime: 30 minutes to handle connection rotation
 
-   - Turbopack for faster builds (Next.js 16)
-   - SWC minification
-   - Automatic code splitting
-   - Tree shaking for unused code elimination
+-- Indexes for Performance
+CREATE INDEX CONCURRENTLY idx_sessions_date_status ON sessions(date, status);
+CREATE INDEX CONCURRENTLY idx_sessions_therapist_date ON sessions(therapist_id, date);
+CREATE INDEX CONCURRENTLY idx_sessions_patient_id ON sessions(patient_id);
 
-3. **CSS Optimization**
+-- Materialized Views for Analytics
+CREATE MATERIALIZED VIEW session_stats AS
+  SELECT therapist_id, COUNT(*) as total_sessions,
+         AVG(EXTRACT(EPOCH FROM (updated_at - created_at))) as avg_duration
+  FROM sessions GROUP BY therapist_id;
+```
 
-   - CSS Modules for scoped styles
-   - TailwindCSS with PurgeCSS
-   - Shared utility classes
+**Caching Strategy:**
 
-4. **Image & Asset Optimization**
-   - SVG icons (inline, no requests)
-   - WebP/AVIF format support
-   - Lazy loading images
+```typescript
+// Multi-tier caching approach
+// 1. Redis Cache (hot data, 5-15 min TTL)
+//    - Active sessions list
+//    - Therapist/patient details
+//    - Availability calendars
+//
+// 2. CDN Edge Caching (static assets)
+//    - Next.js static pages with ISR (revalidate: 60s)
+//    - Stale-while-revalidate for session lists
+//
+// 3. Browser Cache (SWR pattern)
+//    - useSWR with 30s revalidation
+//    - Optimistic updates with automatic rollback
+```
 
-### Backend Optimizations
+**API Resilience:**
 
-1. **Database Queries**
+```typescript
+// Retry Logic with Exponential Backoff
+const retryConfig = {
+  maxRetries: 3,
+  initialDelay: 100, // ms
+  maxDelay: 2000,
+  backoffMultiplier: 2,
+  retryableErrors: [408, 429, 500, 502, 503, 504],
+};
 
-   - Single query with JOINs for session list
-   - Indexed columns (date, status, foreign keys)
-   - Connection pooling (Neon serverless)
+// Circuit Breaker Pattern
+// - Open circuit after 5 consecutive failures
+// - Half-open after 30s to test recovery
+// - Close circuit after 2 successful requests
 
-2. **API Caching**
+// Database Connection Resilience
+// - Automatic reconnection with exponential backoff
+// - Health check endpoint: GET /api/health
+// - Graceful degradation (show cached data if DB unavailable)
+```
 
-   - Response caching headers
-   - Stale-while-revalidate strategy
-   - Conditional requests support
+#### 4. Data Management & Archiving
 
-3. **Error Handling**
-   - Proper HTTP status codes
-   - Zod validation for type safety
-   - Graceful degradation
+**Archiving Strategy:**
 
-See [docs/OPTIMIZATION_SUMMARY.md](./docs/OPTIMIZATION_SUMMARY.md) for detailed performance metrics.
+```typescript
+// Cold Storage Policy (cost optimization + performance)
+// - Archive sessions older than 2 years to S3/Glacier
+// - Keep metadata in hot database for quick lookups
+// - Automated nightly job (cron: 0 2 * * *)
 
-## 🔮 Future Enhancements
+// Implementation:
+// 1. Partition sessions table by year (PostgreSQL partitioning)
+// 2. Export old partitions to Parquet/JSON in S3
+// 3. Drop old partitions, keep reference table
+// 4. On-demand restore for compliance/audit (rare access)
 
-### High Priority
+// Soft Delete Pattern
+ALTER TABLE sessions ADD COLUMN deleted_at TIMESTAMP;
+CREATE INDEX idx_sessions_active ON sessions(id) WHERE deleted_at IS NULL;
+// - Retain deleted records for 90 days before permanent deletion
+// - GDPR compliance: permanent delete on user request
+```
 
-- [ ] **API-Side Pagination**: For datasets >1000 sessions
-- [ ] **Real-time Updates**: WebSocket/Server-Sent Events for live updates
-- [ ] **Session Conflict Detection**: Prevent double-booking
-- [ ] **Advanced Filtering**: Date range, therapist specialty, patient demographics
-- [ ] **Export Functionality**: CSV/PDF export of session data
+**Backup & Disaster Recovery:**
 
-### Medium Priority
+- Continuous backup with Point-in-Time Recovery (PITR) - 30 day retention
+- Cross-region replication for high availability (99.99% uptime)
+- Weekly full database backups to separate storage
+- Automated backup testing (monthly restore drills)
+- RTO: 15 minutes, RPO: 5 minutes
 
-- [ ] **User Authentication**: NextAuth.js integration
-- [ ] **Role-Based Access**: Admin, Therapist, Patient roles
-- [ ] **Session Notes**: Add/edit session notes and outcomes
-- [ ] **Calendar View**: Visual calendar for session scheduling
-- [ ] **Email Notifications**: Appointment reminders
+#### 5. Monitoring & Observability
 
-### Low Priority
+**System Health Monitoring:**
 
-- [ ] **Analytics Dashboard**: Session statistics, trends
-- [ ] **Therapist Availability**: Working hours, vacation management
-- [ ] **Patient Portal**: Self-service booking
-- [ ] **Mobile App**: React Native companion app
-- [ ] **Internationalization**: Multi-language support
+```typescript
+// Metrics to Track (Datadog/New Relic/Prometheus)
+// - API latency (p50, p95, p99)
+// - Error rate (5xx responses)
+// - Database query performance (slow query log)
+// - Connection pool utilization
+// - Memory/CPU usage
+// - Cache hit ratio (target: >80%)
 
-## 🤝 Contributing
+// Alerting Thresholds
+// - ERROR: API error rate >1% for 5 minutes
+// - WARNING: Response time p95 >500ms for 10 minutes
+// - CRITICAL: Database connection failures >3 in 1 minute
+```
 
-Contributions are welcome! Please follow these guidelines:
+**Logging Strategy:**
 
-1. **Fork the repository**
-2. **Create a feature branch**: `git checkout -b feature/amazing-feature`
-3. **Commit changes**: `git commit -m 'Add amazing feature'`
-4. **Push to branch**: `git push origin feature/amazing-feature`
-5. **Open a Pull Request**
+- Structured JSON logging (context, trace_id, user_id)
+- Centralized log aggregation (CloudWatch/ELK/Datadog)
+- Log levels: DEBUG (dev), INFO (prod), ERROR (always)
+- PII redaction in logs (patient names, emails)
 
-### Development Guidelines
+#### 6. Security Hardening
 
-- Follow existing code style
-- Add tests for new features
-- Update documentation
-- Ensure all tests pass
-- Use conventional commits
+**Application Security:**
 
-## 📄 License
+- SQL injection prevention (Drizzle ORM parameterized queries ✓)
+- XSS protection (React auto-escaping ✓, CSP headers)
+- CORS configuration (whitelist allowed origins)
+- Secrets management (AWS Secrets Manager, not env vars in prod)
+- Dependency scanning (Snyk, npm audit) in CI/CD
 
-This project is licensed under the MIT License - see the [LICENSE](./docs/LICENSE) file for details.
+**Compliance & Privacy:**
 
-## 📞 Contact
+- HIPAA compliance requirements (if handling PHI)
+  - Encrypted at rest (AES-256) and in transit (TLS 1.3)
+  - Access logs for audit trails
+  - Business Associate Agreement (BAA) with vendors
+- GDPR compliance (data portability, right to deletion)
+- Regular security audits and penetration testing
+
+#### 7. High Availability Architecture
+
+**Infrastructure Design:**
+
+```
+┌─────────────┐         ┌──────────────┐
+│   Vercel    │────────▶│  PostgreSQL  │
+│  (Multi-AZ) │         │  (Neon HA)   │
+│   + CDN     │         │  Read Replicas│
+└─────────────┘         └──────────────┘
+      │                        │
+      ▼                        ▼
+┌─────────────┐         ┌──────────────┐
+│    Redis    │         │   S3 Backup  │
+│   (Cache)   │         │  (Archives)  │
+└─────────────┘         └──────────────┘
+```
+
+**Deployment Strategy:**
+
+- Blue-green deployments (zero-downtime)
+- Feature flags for gradual rollout (LaunchDarkly)
+- Automated rollback on error threshold breach
+- Database migrations with backward compatibility
+- Canary releases (5% traffic → full rollout)
+
+**Current MVP Implementation:**
+
+- ✅ React optimization: `useMemo`/`useCallback` for rendering
+- ✅ Database: Indexed queries with JOINs
+- ✅ Build: Turbopack, SWC minification, code splitting
+- ✅ Type safety: 100% TypeScript strict mode
+- ✅ Testing: 58+ tests with comprehensive coverage
+
+## License
+
+MIT License - see [LICENSE](./LICENSE)
+
+## Contact
 
 **Annie Lu** - [GitHub](https://github.com/yilu79)
 
-**Project Link**: [https://github.com/yilu79/origin-takehome-interview](https://github.com/yilu79/origin-takehome-interview)
-
 ---
 
-## 🙏 Acknowledgments
-
-- [Next.js](https://nextjs.org/) - React framework
-- [Vercel](https://vercel.com/) - Hosting platform
-- [Neon](https://neon.tech/) - Serverless PostgreSQL
-- [Drizzle ORM](https://orm.drizzle.team/) - TypeScript ORM
-- [TailwindCSS](https://tailwindcss.com/) - Utility-first CSS
-
----
-
-**Built with ❤️ for Origin Therapy**
+Built with Next.js 16, TypeScript, Drizzle ORM, and Neon PostgreSQL
